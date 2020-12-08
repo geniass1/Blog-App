@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 app = Flask(__name__)
@@ -8,7 +8,7 @@ db = SQLAlchemy(app)
 
 
 class Article(db.Model):
-    id  = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     intro = db.Column(db.String(300), nullable=False)
     text = db.Column(db.Text, nullable=False)
