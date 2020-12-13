@@ -14,9 +14,6 @@ class Article(db.Model):
     text = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __repr__(self):
-        return '<Article %r>' % self.id
-
 
 @app.route('/')
 def index():
@@ -43,12 +40,9 @@ def posts(id):
 @app.route('/post/<int:id>/del')
 def posts_del(id):
     article = Article.query.get_or_404(id)
-    try:
-        db.session.delete(article)
-        db.session.commit()
-        return redirect('/post')
-    except ValueError:
-        return 'Error'
+    db.session.delete(article)
+    db.session.commit()
+    return redirect('/post')
 
 
 @app.route('/post/<int:id>/update', methods=['POST', 'GET'])
@@ -59,11 +53,8 @@ def update(id):
         article.intro = request.form['intro']
         article.text = request.form['text']
 
-        try:
-            db.session.commit()
-            return redirect('/post')
-        except ValueError:
-            return 'Error'
+        db.session.commit()
+        return redirect('/post')
     else:
         return render_template('update.html', article=article)
 
@@ -74,23 +65,14 @@ def create():
         title = request.form['title']
         intro = request.form['intro']
         text = request.form['text']
-
         article = Article(title=title, intro=intro, text=text)
-        try:
-            db.session.add(article)
-            db.session.commit()
-            return redirect('/post')
-        except ValueError:
-            return 'Error'
+
+        db.session.add(article)
+        db.session.commit()
+        return redirect('/post')
     else:
         return render_template('create.html')
-    return render_template('create.html')
-
-
-@app.route('/user/<string:name>/<int:id>')
-def user(name, id):
-    return f'Lox {name} {id}'
 
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1", port=8080, debug=True)
+    app.run(host="127.0.0.1", port=8080, debug=True)  # pragma: no cover
