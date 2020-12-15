@@ -69,6 +69,7 @@ def create():
 
         db.session.add(article)
         db.session.commit()
+
         return redirect('/post')
     else:
         return render_template('create.html')
