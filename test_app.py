@@ -1,9 +1,15 @@
-from app import app
 import unittest
-from app import Article, db
+from app import app, db, Article
+
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
+app.config["TESTING"] = True
 
 
 class TestViews(unittest.TestCase):
+    def setUp(self):
+        db.create_all()
+
     def test_index(self):
         tester = app.test_client(self)
         response = tester.get('/')
@@ -85,7 +91,7 @@ class TestViews(unittest.TestCase):
         response = tester.post(
             '/create',
             data=dict(
-                title='test_title', intro='test_intro', text='test_text'
+                title='test_title', intro='test_title', text='test_title'
             ),
             follow_redirects=True
         )
@@ -97,6 +103,10 @@ class TestViews(unittest.TestCase):
         response = tester.get('/create')
         statuscode = response.status_code
         assert statuscode == 200
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
 
 
 if __name__ == '__main__':
