@@ -1,3 +1,5 @@
 .idea
 .coverage
 blog.db
+*.py[cod]
+#dont forget to click S please
