@@ -91,7 +91,7 @@ class TestViews(unittest.TestCase):
         response = tester.post(
             '/create',
             data=dict(
-                title='test_title', intro='test_title', text='test_title'
+                title='test_title', intro='test_intro', text='test_text'
             ),
             follow_redirects=True
         )
