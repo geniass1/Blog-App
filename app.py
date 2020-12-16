@@ -66,10 +66,8 @@ def create():
         intro = request.form['intro']
         text = request.form['text']
         article = Article(title=title, intro=intro, text=text)
-
         db.session.add(article)
         db.session.commit()
-
         return redirect('/post')
     else:
         return render_template('create.html')
