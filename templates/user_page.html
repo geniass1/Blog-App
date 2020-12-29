@@ -7,15 +7,17 @@ NOt Main page
 
 {% block body%}
 <div class="container mt-5">
-    <h1>Result</h1>
+    <h1>User state</h1>
     {% for el in articales %}
+    {% if el.user.login == page_user%}
     <div class="alert alert-dark">
-        <h3><a href="/post/{{el.user.login}}">{{el.user.login}}</a></h3>
+        <h3>{{el.user.login}}</h3>
        <h2>{{el.title}}</h2>
          <h2>{{el.intro}}</h2>
         <h2>{{el.date.date()}}</h2>
         <a href="/post/{{el.id}}" class = "btn btn-warning">Details</a>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}

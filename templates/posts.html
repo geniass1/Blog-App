@@ -13,8 +13,10 @@
          <h2>{{article.intro}}</h2>
         <h2>{{article.date.date()}}</h2>
          <a href="/post" class = "btn btn-warning">Back</a>
-        <a href="/post/{{article.id}}/del" class = "btn btn-danger">Delete</a>
-        <a href="/post/{{article.id}}/update" class = "btn btn-success">Update</a>
+        {% if current_user.id==article.user_id %}
+            <a href="/post/{{article.id}}/del" class = "btn btn-danger">Delete</a>
+            <a href="/post/{{article.id}}/update" class = "btn btn-success">Update</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
