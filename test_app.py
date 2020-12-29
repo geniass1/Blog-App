@@ -1,5 +1,6 @@
 import unittest
-from app import app, db, Article
+from basa import app, db
+from models import Article
 
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
@@ -13,12 +14,6 @@ class TestViews(unittest.TestCase):
     def test_index(self):
         tester = app.test_client(self)
         response = tester.get('/')
-        statuscode = response.status_code
-        assert statuscode == 200
-
-    def test_lox(self):
-        tester = app.test_client(self)
-        response = tester.get('/lox')
         statuscode = response.status_code
         assert statuscode == 200
 

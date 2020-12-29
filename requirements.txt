@@ -1,5 +1,6 @@
-Flask
+Flask~=1.1.2
 Flask-SQLAlchemy
 SQLAlchemy
 flake8
 coverage
+Werkzeug~=1.0.1
