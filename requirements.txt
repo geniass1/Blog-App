@@ -4,3 +4,4 @@ SQLAlchemy
 flake8
 coverage
 Werkzeug~=1.0.1
+flask_login
