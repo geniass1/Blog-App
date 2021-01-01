@@ -7,7 +7,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     login = db.Column(db.String(30), nullable=False)
     password = db.Column(db.String(300), nullable=False)
-    art_ship = db.relationship('Article', backref='user')
+    articles = db.relationship('Article', backref='user')
 
 
 class Article(db.Model):

@@ -17,6 +17,7 @@ def login_page():
             return redirect('/post')
         else:
             flash('Login or password is not correct')
+            return render_template('login.html'), 401
     else:
         if request.method == 'POST':
             flash('please fill all fields')
@@ -48,7 +49,7 @@ def change():
     password = request.form.get('password')
     new_password = request.form.get('new_password')
     if request.method == 'POST':
-        if not login or not password:
+        if not login or not password or not new_password:
             flash("please fill all fields")
         user = User.query.filter_by(login=login).first()
         if user is None:
@@ -93,6 +94,7 @@ def posts(id):
 
 
 @app.route('/post/<int:id>/del')
+@login_required
 def posts_del(id):
     article = Article.query.get_or_404(id)
     db.session.delete(article)
@@ -101,13 +103,13 @@ def posts_del(id):
 
 
 @app.route('/post/<int:id>/update', methods=['POST', 'GET'])
+@login_required
 def update(id):
     article = Article.query.get(id)
     if request.method == 'POST':
         article.title = request.form['title']
         article.intro = request.form['intro']
         article.text = request.form['text']
-
         db.session.commit()
         return redirect('/post')
     else:
