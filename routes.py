@@ -49,7 +49,7 @@ def change():
     password = request.form.get('password')
     new_password = request.form.get('new_password')
     if request.method == 'POST':
-        if not login or not password:
+        if not login or not password or not new_password:
             flash("please fill all fields")
         user = User.query.filter_by(login=login).first()
         if user is None:

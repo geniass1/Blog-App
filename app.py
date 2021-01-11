@@ -1,4 +1,3 @@
-# pragma: no cover
 from init import app  # pragma: no cover
 import routes  # noqa: F401 # pragma: no cover
 if __name__ == '__main__':  # pragma: no cover
