@@ -1,6 +1,6 @@
 import unittest
 from init import app, db
-import routes  # noqa: F401 #
+import routes  # noqa: F401
 from werkzeug.security import generate_password_hash
 from models import Article, User
 
@@ -165,7 +165,7 @@ class TestViews(unittest.TestCase):
         statuscode = response.status_code
         assert statuscode == 302
 
-    def test_update1(self):
+    def test_update_get(self):
         tester = app.test_client(self)
         response1 = tester.post(
             '/login',
@@ -188,7 +188,7 @@ class TestViews(unittest.TestCase):
         statuscode = response.status_code
         assert statuscode == 200
 
-    def test_update2(self):
+    def test_update_post(self):
         tester = app.test_client(self)
         article = Article(
             title='test_title',
